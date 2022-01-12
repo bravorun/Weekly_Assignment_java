@@ -19,9 +19,10 @@ public class Fibonacci {
 			int temp = a;
 			a = b;
 			b = temp + b;
-			System.out.print(a);
+			System.out.print(a+"  ");
 			sum += a;
 		}
+		System.out.println();
 		System.out.println("Average is " + sum / n);
 	}
 
