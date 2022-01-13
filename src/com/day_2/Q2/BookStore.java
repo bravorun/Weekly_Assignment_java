@@ -12,7 +12,7 @@ public class BookStore {
 	public void sell(String title,int no) {
 		if(noOfBooks>0) {
 			for(int i=0;i<noOfBooks;i++) {
-				if(book[i].getBookTitle()==title) {
+				if(book[i].getBookTitle().equals(title)) {
 					if(book[i].getNumOfCopies()>=no)
 					book[i].setNumOfCopies(book[i].getNumOfCopies()-no);
 					else
@@ -29,14 +29,14 @@ public class BookStore {
 		{
 			int foundFlag=0;
 			if(noOfBooks>0) {
-			for(int i=1;i<=noOfBooks;i++){
-				if(book[i].getIsbn()==isbn) {
+			for(int i=0;i<noOfBooks;i++){
+				if(book[i].getIsbn().contentEquals(isbn)) {
 					foundFlag=1;
 					book[i].setNumOfCopies(book[i].getNumOfCopies()+qty);
 				}
 			}
 			}
-			if(foundFlag==0 && noOfBooks<=10  ) {
+			if(foundFlag==0 && noOfBooks<10  ) {
 				System.out.println("No Books Available");
 				addbook();
 				System.out.println(noOfBooks);
@@ -60,7 +60,6 @@ public class BookStore {
 		isbn=sc.next();
 		System.out.println("Enter Book Qty");
 		noOfCopies=sc.nextInt();
-		//sc.close();
 		book[noOfBooks]=new Book(bookName,author,isbn,noOfCopies);
 		noOfBooks+=1;
 	}
