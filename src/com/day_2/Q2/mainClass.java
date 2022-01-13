@@ -1,44 +1,48 @@
 package com.day_2.Q2;
-import java.util.Scanner;
-public class mainClass {
-	public static void menueDriven(BookStore bookStore){
-		int opt;
-		Scanner sc=new Scanner (System.in);
-		do {
-			System.out.println("Enter “1”, to display the Books: Title – Author – ISBN - Quantity.\n" + 
-					"Enter “2”, to order new books.\n" + 
-					"Enter “3”, to sell books.\n" +
-					"Enter 4 to add books"+
-					"Enter “0”, to exit the system.");
 
-		
+import java.util.Scanner;
+
+public class mainclass {
+	private static BookStore raj=new BookStore();
+	public static void menue() {
+		int opt;
+		Scanner sc=new Scanner(System.in);
+		while (true){
+		System.out.println("Enter “1”, to display the Books: Title – Author – ISBN - Quantity.\n" + 
+				"Enter “2”, to order new books.\n" + 
+				"Enter “3”, to sell books.\n" + 
+				"Enter “0”, to exit the system");
 		opt=sc.nextInt();
-		if(opt==1)
-			bookStore.display();
-		else if(opt==2) {
-			System.out.println("Enter ISBIN and quantity to order");
-			String ISBN=sc.next();
-			int noOfCopies=sc.nextInt();
-			bookStore.order(ISBN, noOfCopies);
+		switch(opt) {
+		case 1:
+			raj.display();
+			break;
+		case 2:
+			String isbn;
+			int qty;
+			System.out.println("Enter ISBN:");
+			isbn=sc.next();
+			System.out.println("Enter QTY:");
+			qty=sc.nextInt();
+			raj.order(isbn, qty);
+			break;
+		case 3:
+			String title;
+			int qt;
+			System.out.println("Enter Title:");
+			title=sc.next();
+			System.out.println("Enter QTY:");
+			qt=sc.nextInt();
+			raj.sell(title, qt);
+		case 0:
+			System.exit(0);
 		}
-		else if(opt==3) {
-			System.out.println("Enter Book Title and quantity to sell");
-			String bookTitle=sc.next();
-			int noOfCopies=sc.nextInt();
-			bookStore.sell(bookTitle, noOfCopies);
 		}
-		else if(opt==4) {
-			bookStore.insertBook();
-		}
-		}while(opt!=0);
-		sc.close();
-			
-		
 	}
-	
 	public static void main(String args[]) {
-		BookStore bookStore=new BookStore();
-		menueDriven(bookStore);
 		
-}
+		menue();
+		
 	}
+
+}

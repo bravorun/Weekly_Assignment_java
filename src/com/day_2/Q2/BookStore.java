@@ -1,63 +1,78 @@
 package com.day_2.Q2;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BookStore {
-	private ArrayList<Book> books=new ArrayList<>();
-
-	public void sell(String bookTitle, int noOfCopies) {
-		for (Book b : books) {
-			if (b.getBookTitle() == bookTitle) {
-				if (b.getNumOfCopies() >= noOfCopies) {
-					b.setNumOfCopies(b.getNumOfCopies() - noOfCopies);
-				} else {
-					System.out.println("Less no of copies available");
+	private Book[] book=new Book[10];
+	private static int noOfBooks;
+	
+	BookStore() {
+		noOfBooks=0;
+	}
+	public void sell(String title,int no) {
+		if(noOfBooks>0) {
+			for(int i=0;i<noOfBooks;i++) {
+				if(book[i].getBookTitle()==title) {
+					if(book[i].getNumOfCopies()>=no)
+					book[i].setNumOfCopies(book[i].getNumOfCopies()-no);
+					else
+						System.out.println("Insufficient Copies available");
 				}
-			} 
-			else {
-				System.out.println("Book Not Available");
+				else
+					System.out.println("Book Not Available");
 			}
-
-		}
-	}
-
-	public void order(String ISBN, int noOfCopies) {
-		for (Book b : books) {
-			if (b.getISBN() == ISBN) {
-					b.setNumOfCopies(b.getNumOfCopies() +noOfCopies);
-				} else {
-					System.out.println("Book not in store please add book");
-					insertBook();
-				}
-			} 
 			
-
 		}
-
-
-	public void insertBook() {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter Books Details");
-		String bookTitle=sc.next();
-		String author=sc.next();
-		String ISBN=sc.next();
-		int noOfCopies=sc.nextInt();
-		Book b=new Book(bookTitle,author,ISBN,noOfCopies);
-		books.add(b);
-		sc.close();
+		System.out.println("No Books Available");
 	}
-
+	public void order(String isbn,int qty) {
+		{
+			int foundFlag=0;
+			if(noOfBooks>0) {
+			for(int i=1;i<=noOfBooks;i++){
+				if(book[i].getIsbn()==isbn) {
+					foundFlag=1;
+					book[i].setNumOfCopies(book[i].getNumOfCopies()+qty);
+				}
+			}
+			}
+			if(foundFlag==0 && noOfBooks<=10  ) {
+				System.out.println("No Books Available");
+				addbook();
+				System.out.println(noOfBooks);
+				book[0].display();
+			}
+			
+		}
+		
+	}
+	private void addbook() {
+		String bookName;
+		String author;
+		String isbn;
+		int noOfCopies;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Book Title");
+		bookName=sc.next();
+		System.out.println("Enter Book Author");
+		author=sc.next();
+		System.out.println("Enter Book ISBN");
+		isbn=sc.next();
+		System.out.println("Enter Book Qty");
+		noOfCopies=sc.nextInt();
+		//sc.close();
+		book[noOfBooks]=new Book(bookName,author,isbn,noOfCopies);
+		noOfBooks+=1;
+	}
 	public void display() {
-		if (books.size()==0) {
-			System.out.println("Book Shop is Empty Please add Book");
+		if(noOfBooks>0) {
+		for(int i=0;i<noOfBooks;i++) {
+			book[i].display();
+		}
 		}
 		else {
-		for(Book b :books) {
-			b.display();
+			System.out.println("No Books Available");
 		}
-		}
-
 	}
 
 }
