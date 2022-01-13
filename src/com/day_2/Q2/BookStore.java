@@ -4,17 +4,19 @@ import java.util.Scanner;
 
 public class BookStore {
 	private Book[] book=new Book[10];
-	private static int noOfBooks;
+	private  int noOfBooks;
 	
 	BookStore() {
 		noOfBooks=0;
 	}
 	public void sell(String title,int no) {
-		if(noOfBooks>0) {
+		if(noOfBooks!=0) {
 			for(int i=0;i<noOfBooks;i++) {
 				if(book[i].getBookTitle().equals(title)) {
-					if(book[i].getNumOfCopies()>=no)
+					if(book[i].getNumOfCopies()>=no) {
 					book[i].setNumOfCopies(book[i].getNumOfCopies()-no);
+					System.out.println("Sold Sucessfully \n Remaning Copies are :"+book[i].getNumOfCopies());
+					}
 					else
 						System.out.println("Insufficient Copies available");
 				}
@@ -23,7 +25,8 @@ public class BookStore {
 			}
 			
 		}
-		System.out.println("No Books Available");
+		else
+		System.out.println("No Books Available in store");
 	}
 	public void order(String isbn,int qty) {
 		{
@@ -39,8 +42,6 @@ public class BookStore {
 			if(foundFlag==0 && noOfBooks<10  ) {
 				System.out.println("No Books Available");
 				addbook();
-				System.out.println(noOfBooks);
-				book[0].display();
 			}
 			
 		}
