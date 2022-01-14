@@ -63,6 +63,7 @@ public class BookStore {
 		noOfCopies=sc.nextInt();
 		book[noOfBooks]=new Book(bookName,author,isbn,noOfCopies);
 		noOfBooks+=1;
+		sc.close();
 	}
 	public void display() {
 		if(noOfBooks>0) {
