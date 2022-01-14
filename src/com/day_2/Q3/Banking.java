@@ -22,6 +22,7 @@ public static void main(String args[]) {
 		String tradeLicence=scanner.nextLine();
 		acc=new CurrentAccount(name,amount,tradeLicence);
 	}
+	
 	else {
 		System.exit(1);
 	}
